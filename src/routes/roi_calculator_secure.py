@@ -230,7 +230,7 @@ def submit_roi_form():
             'next_steps': {
                 'email_confirmation': 'Check your email for detailed projections',
                 'follow_up': f'Our team will contact you within {get_follow_up_time(tier)}',
-                'calendar_link': 'https://calendly.com/chimehq/roi-consultation'
+                'calendar_link': 'https://www.chimehq.co/#/contact?utm_source=roi_calculator&utm_medium=email&utm_campaign=confirmation
             }
         })
         

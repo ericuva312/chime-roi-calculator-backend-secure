@@ -215,7 +215,7 @@ class EmailServiceCompliant:
                     </div>
                     
                     <div style="text-align: center;">
-                        <a href="https://calendly.com/chimehq/roi-consultation?utm_source=email&utm_medium=confirmation&utm_campaign=roi_calculator" class="cta-button">
+                        <a href="https://www.chimehq.co/#/contact?utm_source=roi_calculator&utm_medium=email&utm_campaign=confirmation" class="cta-button">
                             📅 Book Your Strategy Call
                         </a>
                     </div>
@@ -275,7 +275,7 @@ We guarantee at least 15% revenue growth within 90 days or we'll pay you $1,000.
 Your lead score: {submission.lead_score}/150 ({submission.tier} Priority)
 Our team will reach out within {self._get_follow_up_time(submission.tier)} to discuss your growth strategy.
 
-Book your strategy call: https://calendly.com/chimehq/roi-consultation
+Book your strategy call: https://www.chimehq.co/#/contact?utm_source=roi_calculator&utm_medium=email&utm_campaign=confirmation
 
 Best regards,
 The Chime Team

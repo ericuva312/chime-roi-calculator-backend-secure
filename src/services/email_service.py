@@ -54,7 +54,7 @@ def send_confirmation_email(submission, projections):
         )
         
         # Add UTM tracking to links
-        calendar_link = "https://calendly.com/chimehq/strategy-call?utm_source=roi_calculator&utm_medium=email&utm_campaign=confirmation"
+        calendar_link = "https://www.chimehq.co/#/contact?utm_source=roi_calculator&utm_medium=email&utm_campaign=confirmation"
         
         # Send email
         response = sg.send(mail)
@@ -223,7 +223,7 @@ def generate_confirmation_email_html(submission, projections):
                 <div style="margin-bottom: 20px;">
                     <strong>⏱ Time-to-Value:</strong> Expect measurable improvements in 30–90 days
                 </div>
-                <a href="https://calendly.com/chimehq/strategy-call?utm_source=roi_calculator&utm_medium=email&utm_campaign=confirmation" class="cta-button">
+                <a href="https://www.chimehq.co/#/contact?utm_source=roi_calculator&utm_medium=email&utm_campaign=confirmation" class="cta-button">
                     Book Your Free 30-Minute Strategy Session
                 </a>
             </div>
@@ -293,7 +293,7 @@ WHAT THIS MEANS FOR {submission.business_name.upper()}:
 ⏱ Time-to-Value: Expect measurable improvements in 30–90 days
 
 🚀 NEXT STEP: Book Your Free 30-Minute Strategy Session
-https://calendly.com/chimehq/strategy-call?utm_source=roi_calculator&utm_medium=email&utm_campaign=confirmation
+https://www.chimehq.co/#/contact?utm_source=roi_calculator&utm_medium=email&utm_campaign=confirmation
 
 🚀 OUR GUARANTEE:
 15% revenue growth or 25% cost reduction within 90 days—or $1,000 payout. No questions asked.

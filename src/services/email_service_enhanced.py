@@ -288,10 +288,26 @@ PREMIUM_EMAIL_TEMPLATE = """<!DOCTYPE html>
         </p>
       </div>
 
-      <div style="text-align: center;">
-        <a href="https://www.chimehq.co/#/contact?utm_source=roi_calculator&utm_medium=email&utm_campaign=confirmation" class="cta-button">
-          📞 Schedule a Strategy Call
-        </a>
+      <div style="text-align: center; margin: 30px 0;">
+        <!-- Email-client-friendly CTA button -->
+        <table cellpadding="0" cellspacing="0" border="0" style="margin: 0 auto;">
+          <tr>
+            <td style="background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 50%, #1e40af 100%); border-radius: 20px; padding: 0;">
+              <a href="https://www.chimehq.co/#/contact?utm_source=roi_calculator&utm_medium=email&utm_campaign=confirmation" 
+                 style="display: block; padding: 22px 45px; color: #ffffff !important; text-decoration: none; font-size: 22px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; border-radius: 20px; text-align: center;">
+                📞 SCHEDULE A STRATEGY CALL
+              </a>
+            </td>
+          </tr>
+        </table>
+        
+        <!-- Fallback text link for email clients that don't support the button -->
+        <div style="margin-top: 20px; font-size: 18px; font-weight: bold;">
+          <a href="https://www.chimehq.co/#/contact?utm_source=roi_calculator&utm_medium=email&utm_campaign=confirmation" 
+             style="color: #2563eb !important; text-decoration: underline; font-size: 20px; font-weight: bold;">
+            → Schedule Your Strategy Call Here ←
+          </a>
+        </div>
       </div>
       
       <div style="text-align: center; margin-top: 15px; color: #6b7280; font-size: 14px;">
