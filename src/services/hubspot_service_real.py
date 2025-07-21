@@ -22,10 +22,10 @@ def get_headers():
 def map_business_stage(frontend_value):
     """Map frontend business stage values to HubSpot values"""
     mapping = {
-        'Startup': 'startup',
-        'Growth': 'growing', 
-        'Established': 'established',
-        'Mature': 'enterprise'
+        'startup': 'startup',
+        'growing': 'growing', 
+        'established': 'established',
+        'enterprise': 'enterprise'
     }
     return mapping.get(frontend_value, 'growing')
 
