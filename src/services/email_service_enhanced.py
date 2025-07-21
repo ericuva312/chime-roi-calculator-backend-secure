@@ -16,7 +16,7 @@ if not SENDGRID_API_KEY:
     print("⚠️ SendGrid API key not found - Email integration will be disabled")
     SENDGRID_ENABLED = False
 else:
-    # Ensure proper format (keep full SG.xxx.xxx format)
+    # API key is already in full SG.xxx.xxx format
     print("✅ SendGrid API key loaded securely from environment")
     SENDGRID_ENABLED = True
 
@@ -289,7 +289,7 @@ def send_confirmation_email(submission, projections):
             print("⚠️ Email sending skipped - SendGrid API key not configured")
             return False
         
-        sg = sendgrid.SendGridAPIClient(api_key=f"SG.{SENDGRID_API_KEY}")
+        sg = sendgrid.SendGridAPIClient(api_key=SENDGRID_API_KEY)
         
         # Email subject with personalization
         subject = f"Thank you for contacting Chime – See your personalized business insights!"
@@ -423,7 +423,7 @@ def send_internal_notification(submission, score_breakdown):
             print("⚠️ Internal notification skipped - SendGrid API key not configured")
             return False
         
-        sg = sendgrid.SendGridAPIClient(api_key=f"SG.{SENDGRID_API_KEY}")
+        sg = sendgrid.SendGridAPIClient(api_key=SENDGRID_API_KEY)
         
         # Subject with lead tier and score
         subject = f"New ROI Lead · {submission.business_name} · {submission.tier}/{submission.lead_score}"
