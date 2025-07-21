@@ -159,24 +159,27 @@ PREMIUM_EMAIL_TEMPLATE = """<!DOCTYPE html>
       display: inline-block;
       width: fit-content;
       margin: 0 auto;
-      background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+      background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 50%, #1e40af 100%);
       color: white !important;
-      padding: 20px 40px;
-      border-radius: 16px;
-      font-size: 20px;
-      font-weight: 700;
+      padding: 22px 45px;
+      border-radius: 20px;
+      font-size: 22px;
+      font-weight: 800;
       text-align: center;
-      text-decoration: none !important;
-      box-shadow: 0 10px 25px rgba(37, 99, 235, 0.4), 0 4px 12px rgba(0, 0, 0, 0.15);
+      text-decoration: none;
+      letter-spacing: 0.5px;
+      box-shadow: 0 12px 30px rgba(37, 99, 235, 0.4), 0 6px 15px rgba(0, 0, 0, 0.15);
       transition: all 0.3s ease;
-      border: 2px solid transparent;
+      border: 3px solid rgba(255, 255, 255, 0.2);
       position: relative;
       overflow: hidden;
+      text-transform: uppercase;
     }
     .cta-button:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 15px 35px rgba(37, 99, 235, 0.5), 0 8px 20px rgba(0, 0, 0, 0.2);
-      background: linear-gradient(135deg, #1d4ed8 0%, #1e40af 100%);
+      transform: translateY(-4px);
+      box-shadow: 0 18px 40px rgba(37, 99, 235, 0.6), 0 10px 25px rgba(0, 0, 0, 0.25);
+      background: linear-gradient(135deg, #1d4ed8 0%, #1e40af 50%, #1e3a8a 100%);
+      border-color: rgba(255, 255, 255, 0.3);
     }
     .cta-button:before {
       content: '';
@@ -185,13 +188,12 @@ PREMIUM_EMAIL_TEMPLATE = """<!DOCTYPE html>
       left: -100%;
       width: 100%;
       height: 100%;
-      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-      transition: left 0.5s;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+      transition: left 0.6s;
     }
     .cta-button:hover:before {
       left: 100%;
     }
-
     /* --- Footer --- */
     .footer {
       text-align: center;
@@ -220,8 +222,9 @@ PREMIUM_EMAIL_TEMPLATE = """<!DOCTYPE html>
         font-size: 14px;
       }
       .cta-button {
-        padding: 15px 25px;
-        font-size: 16px;
+        padding: 18px 30px;
+        font-size: 18px;
+        border-radius: 16px;
       }
     }
   </style>
@@ -286,8 +289,8 @@ PREMIUM_EMAIL_TEMPLATE = """<!DOCTYPE html>
       </div>
 
       <div style="text-align: center;">
-        <a href="https://calendly.com/chimehq/strategy-call?utm_source=roi_calculator&utm_medium=email&utm_campaign=confirmation" class="cta-button">
-          🚀 Schedule Your Strategy Call
+        <a href="https://www.chimehq.co/#/contact?utm_source=roi_calculator&utm_medium=email&utm_campaign=confirmation" class="cta-button">
+          📞 Schedule a Strategy Call
         </a>
       </div>
       
