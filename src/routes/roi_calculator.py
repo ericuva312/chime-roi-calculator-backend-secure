@@ -13,7 +13,7 @@ from src.models.roi_submission import ROISubmission
 from src.models.user import db
 from src.utils.validation import validate_roi_submission, validate_roi_calculation, ValidationError
 from src.utils.lead_scoring import calculate_lead_score
-from src.services.email_service_real import send_all_emails, test_sendgrid_connection
+from src.services.email_service_enhanced import send_confirmation_email, send_internal_notification
 from src.services.hubspot_service_real import HubSpotServiceReal
 
 roi_bp = Blueprint('roi_calculator', __name__)
@@ -156,10 +156,18 @@ def submit_roi_calculation():
                 'expected_annual_benefit': projections.get('expected', {}).get('annual_benefit', 0)
             }
             
-            # Send emails
-            email_results = send_all_emails(integration_data, projections)
-            if email_results.get('success'):
+            # Send emails using enhanced service
+            email_sent = send_confirmation_email(submission, projections)
+            if email_sent:
                 submission.email_sent = True
+            
+            # Send internal notification
+            score_breakdown = {
+                'demographic': 40,  # Simplified for now
+                'behavioral': 30,
+                'fit': 25
+            }
+            send_internal_notification(submission, score_breakdown)
             
             # Sync to HubSpot
             hubspot_result = HubSpotServiceReal.sync_submission(integration_data)
