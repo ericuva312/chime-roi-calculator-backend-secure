@@ -13,8 +13,8 @@ from src.models.roi_submission import ROISubmission
 from src.models.user import db
 from src.utils.validation import validate_roi_submission, validate_roi_calculation, ValidationError
 from src.utils.lead_scoring import calculate_lead_score
-from src.services.email_service import send_confirmation_email, send_internal_notification
-from src.services.hubspot_service_fixed_final import HubSpotServiceFixed
+from src.services.email_service_real import send_all_emails, test_sendgrid_connection
+from src.services.hubspot_service_real import HubSpotServiceReal
 
 roi_bp = Blueprint('roi_calculator', __name__)
 
@@ -140,41 +140,32 @@ def submit_roi_calculation():
         
         # Trigger async processes (email and HubSpot sync)
         try:
-            # Send confirmation email
-            email_sent = send_confirmation_email(submission, projections)
-            if email_sent:
+            # Prepare data for integrations
+            integration_data = {
+                'first_name': cleaned_data['first_name'],
+                'last_name': cleaned_data['last_name'],
+                'email': cleaned_data['email'],
+                'business_name': cleaned_data['business_name'],
+                'phone': cleaned_data.get('phone'),
+                'website': cleaned_data.get('website'),
+                'monthly_revenue': cleaned_data['monthly_revenue'],
+                'industry': cleaned_data['industry'],
+                'business_stage': cleaned_data['business_stage'],
+                'lead_score': lead_score,
+                'tier': tier,
+                'expected_annual_benefit': projections.get('expected', {}).get('annual_benefit', 0)
+            }
+            
+            # Send emails
+            email_results = send_all_emails(integration_data, projections)
+            if email_results.get('success'):
                 submission.email_sent = True
             
-            # Send internal notification
-            send_internal_notification(submission, score_breakdown)
-            
             # Sync to HubSpot
-            hubspot_service = HubSpotServiceFixed()
-            
-            # Create/update contact
-            contact_result = hubspot_service.upsert_contact(
-                cleaned_data, 
-                lead_score, 
-                tier
-            )
-            
-            hubspot_success = False
-            if contact_result['success']:
-                submission.hubspot_contact_id = contact_result['contact_id']
-                
-                # Create deal
-                deal_result = hubspot_service.create_deal(
-                    cleaned_data,
-                    contact_result['contact_id'],
-                    lead_score
-                )
-                
-                if deal_result['success']:
-                    submission.hubspot_deal_id = deal_result['deal_id']
-                    hubspot_success = True
-            
-            if hubspot_success:
-                submission.hubspot_synced = True
+            hubspot_result = HubSpotServiceReal.sync_submission(integration_data)
+            if hubspot_result.get('success'):
+                submission.hubspot_contact_id = hubspot_result.get('contact_id')
+                submission.hubspot_deal_id = hubspot_result.get('deal_id')
             
             # Update submission with sync status
             db.session.commit()
@@ -183,15 +174,25 @@ def submit_roi_calculation():
             # Log error but don't fail the submission
             print(f"Async processing error: {async_error}")
         
-        # Return success response
-        return jsonify({
+        # Return success response with integration results
+        response_data = {
             'status': 'success',
             'submission_id': submission.submission_id,
             'lead_score': lead_score,
             'tier': tier,
             'projections': projections,
             'message': f'Thank you, {submission.first_name}! Your custom growth blueprint is on the way.'
-        })
+        }
+        
+        # Add integration results if available
+        if hasattr(submission, 'email_sent') and submission.email_sent:
+            response_data['email_sent'] = True
+        if hasattr(submission, 'hubspot_contact_id') and submission.hubspot_contact_id:
+            response_data['hubspot_contact_id'] = submission.hubspot_contact_id
+        if hasattr(submission, 'hubspot_deal_id') and submission.hubspot_deal_id:
+            response_data['hubspot_deal_id'] = submission.hubspot_deal_id
+        
+        return jsonify(response_data)
         
     except Exception as e:
         # Rollback database transaction
