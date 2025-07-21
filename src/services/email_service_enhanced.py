@@ -156,22 +156,40 @@ PREMIUM_EMAIL_TEMPLATE = """<!DOCTYPE html>
 
     /* --- CTA Button --- */
     .cta-button {
-      display: block;
+      display: inline-block;
       width: fit-content;
       margin: 0 auto;
       background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
-      color: white;
-      padding: 18px 35px;
-      border-radius: 12px;
-      font-size: 18px;
-      font-weight: 600;
+      color: white !important;
+      padding: 20px 40px;
+      border-radius: 16px;
+      font-size: 20px;
+      font-weight: 700;
       text-align: center;
-      box-shadow: 0 8px 20px rgba(37, 99, 235, 0.3);
+      text-decoration: none !important;
+      box-shadow: 0 10px 25px rgba(37, 99, 235, 0.4), 0 4px 12px rgba(0, 0, 0, 0.15);
       transition: all 0.3s ease;
+      border: 2px solid transparent;
+      position: relative;
+      overflow: hidden;
     }
     .cta-button:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 12px 30px rgba(37, 99, 235, 0.4);
+      transform: translateY(-3px);
+      box-shadow: 0 15px 35px rgba(37, 99, 235, 0.5), 0 8px 20px rgba(0, 0, 0, 0.2);
+      background: linear-gradient(135deg, #1d4ed8 0%, #1e40af 100%);
+    }
+    .cta-button:before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+      transition: left 0.5s;
+    }
+    .cta-button:hover:before {
+      left: 100%;
     }
 
     /* --- Footer --- */
@@ -216,8 +234,8 @@ PREMIUM_EMAIL_TEMPLATE = """<!DOCTYPE html>
     </div>
     <div class="content">
       <div class="intro">
-        <h2>🚀 Ready to Transform Your Business?</h2>
-        <p>We appreciate you taking the time to explore your growth potential with Chime's AI-powered automation platform. <strong>Chime has helped 2,847+ businesses achieve an average of 35% revenue growth</strong> in their first year.</p>
+        <h2>🚀 Unlock Your Business's True Potential Today</h2>
+        <p>Thank you for exploring how Chime's AI-powered automation platform can accelerate your growth. <strong>Chime has helped 2,847+ businesses achieve an average of 35% revenue growth</strong> in their first year.</p>
         <p>Below is your personalized analysis based on your {{industry}} business metrics:</p>
       </div>
 
@@ -253,18 +271,25 @@ PREMIUM_EMAIL_TEMPLATE = """<!DOCTYPE html>
       </table>
 
       <div class="next-steps">
-        <h3>What Happens Next?</h3>
+        <h3>What's next?</h3>
         <ul>
-          <li>Your detailed growth analysis report will arrive in your inbox within 5 minutes</li>
-          <li>A member of our team will review your information and reach out shortly</li>
-          <li>In the meantime, explore our case studies to see how we've helped businesses like {{business_name}}</li>
-          <li>Ready to take the next step? Schedule a no-obligation strategy call with us</li>
+          <li>Review your Revenue Growth Plan.</li>
+          <li>One of our growth experts will review your data and reach out shortly to discuss tailored strategies.</li>
+          <li>Meanwhile, dive into our success stories to see how businesses like yours have soared with Chime.</li>
         </ul>
       </div>
 
-      <a href="https://www.chimehq.co/#/contact?utm_source=roi_calculator&utm_medium=email&utm_campaign=confirmation" class="cta-button">
-        📅 Schedule Your Strategy Call
-      </a>
+      <div style="text-align: center; margin-bottom: 30px; padding: 20px; background-color: #f8fafc; border-radius: 8px;">
+        <p style="font-size: 16px; color: #475569; margin: 0; line-height: 1.6;">
+          Ready to supercharge your business? Schedule a no-obligation strategy call with us today and take the first step toward transformational growth.
+        </p>
+      </div>
+
+      <div style="text-align: center;">
+        <a href="https://calendly.com/chimehq/strategy-call?utm_source=roi_calculator&utm_medium=email&utm_campaign=confirmation" class="cta-button">
+          🚀 Schedule Your Strategy Call
+        </a>
+      </div>
       
       <div style="text-align: center; margin-top: 15px; color: #6b7280; font-size: 14px;">
         Free 30-minute consultation • No commitment required
